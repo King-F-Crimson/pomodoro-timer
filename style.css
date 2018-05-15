@@ -1,0 +1,31 @@
+body {
+    line-height: 1.4;
+    font-size: 18px;
+    font-family: "Helvetica Neue";
+
+    color: #454545;
+}
+
+#main-content {
+    margin: auto;
+
+    max-width: 800px;
+}
+
+.button {
+    width: 200px;
+    height: 60px;
+
+    margin: 0;
+    padding: 0;
+
+    display: inline-block;
+    box-sizing: border-box;
+
+    border: 3px solid #CCCCCC;
+
+    line-height: 54px;
+    font-size: 30px;
+
+    text-align: center;
+}
