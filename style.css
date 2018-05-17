@@ -12,14 +12,30 @@ body {
     max-width: 800px;
 }
 
-.button {
-    width: 200px;
+.timer {
+    width: 100%;
+
+    font-size: 80px;
+
+    text-align: center;
+}
+
+.control {
+    max-width: 400px;
     height: 60px;
 
-    margin: 0;
+    margin: auto;
+
+    display: flex;
+    justify-content: space-between;
+}
+
+.button {
+    flex: 1 1 0;
+
+    margin: 0 5px;
     padding: 0;
 
-    display: inline-block;
     box-sizing: border-box;
 
     border: 3px solid #CCCCCC;
