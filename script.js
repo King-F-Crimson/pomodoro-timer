@@ -9,9 +9,14 @@ var timer = {
 
     set: function(time) {
         this.time = time;
+        this.update_display();
+    },
+
+    // Sets the time and setups the interval, only to be run when the timer is stopped initially.
+    start: function(time) {
+        this.set(time)
 
         this.setup_interval();
-        this.update_display();
     },
 
     // Interval function is setup when the timer is set so the "leftover" time
@@ -39,14 +44,13 @@ var timer = {
     // This gets called every second to update the clock.
     update: function() {
         if (this.time > 0) {
-            this.time = this.time - 1;
-            this.update_display();
+            this.set(this.time - 1);
         }
     }
 };
 
 $(document).ready(function() {
     // Assign button press to the functions.
-    $('.pomodoro').click(function() {timer.set(pomodoro_time)});
-    $('.break').click(function() {timer.set(break_time)});
+    $('.pomodoro').click(function() {timer.start(pomodoro_time)});
+    $('.break').click(function() {timer.start(break_time)});
 });
