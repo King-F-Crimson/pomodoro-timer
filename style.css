@@ -64,7 +64,7 @@ body {
     color: #FF7161;
 }
 
-.pomodoro-counter {
+.counter {
     max-width: 400px;
     min-height: 60px;
 
@@ -84,4 +84,8 @@ body {
 
     border: 2px solid #FFFFFF;
     border-radius: 50%;
+}
+
+.fill {
+    background-color: #FFFFFF;
 }

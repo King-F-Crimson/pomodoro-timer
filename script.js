@@ -1,13 +1,19 @@
 var timer = {
-    element: $('.timer'),
+    timer_element: $('.timer'),
+
     time: 0,
     state: 'stop',
+    pomodoro_count: 0,
     interval_id: null,
 
-    // Standard Pomodoro time in seconds.
-    pomodoro_time: 25 * 60,
-    short_break_time: 5 * 60,
-    long_break_time: 15 * 60,
+    // // Standard Pomodoro time in seconds.
+    // pomodoro_time: 25 * 60,
+    // short_break_time: 5 * 60,
+    // long_break_time: 15 * 60,
+
+    pomodoro_time: 5,
+    short_break_time: 1,
+    long_break_time: 3,
 
     set_time: function(time) {
         this.time = time;
@@ -69,7 +75,7 @@ var timer = {
     },
 
     update_display: function() {
-        this.element.text(this.get_time_text());
+        this.timer_element.text(this.get_time_text());
     },
 
     switch_to_next_state: function() {
@@ -81,12 +87,22 @@ var timer = {
         }
     },
 
+    set_pomodoro_count: function(count) {
+        this.pomodoro_count = count;
+
+        $(`.tomato:lt(${count})`).addClass("fill");
+    },
+
     // This gets called every second to update the clock.
     update: function() {
         if (this.time > 0) {
             this.set_time(this.time - 1);
         }
         else {
+            if (this.state === 'pomodoro') {
+                this.set_pomodoro_count(this.pomodoro_count + 1);
+            }
+
             this.switch_to_next_state();
         }
     }
