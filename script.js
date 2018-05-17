@@ -35,10 +35,10 @@ var timer = {
         if (state === 'pomodoro') {
             this.start(this.pomodoro_time);
         }
-        if (state === 'break') {
+        else if (state === 'break') {
             this.start(this.break_time);
         }
-        if (state === 'stop') {
+        else if (state === 'stop') {
             this.stop();
         }
     },
@@ -71,10 +71,22 @@ var timer = {
         this.element.text(this.get_time_text());
     },
 
+    switch_to_next_state: function() {
+        if (this.state === 'pomodoro') {
+            this.set_state('break');
+        }
+        else if (this.state === 'break') {
+            this.set_state('pomodoro');
+        }
+    },
+
     // This gets called every second to update the clock.
     update: function() {
         if (this.time > 0) {
             this.set_time(this.time - 1);
+        }
+        else {
+            this.switch_to_next_state();
         }
     }
 };
