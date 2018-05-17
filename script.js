@@ -5,11 +5,24 @@ var break_time = 5 * 60;
 var timer = {
     element: $('.timer'),
     time: 0,
+    interval_id: null,
 
     set: function(time) {
         this.time = time;
 
+        this.setup_interval();
         this.update_display();
+    },
+
+    // Interval function is setup when the timer is set so the "leftover" time
+    // from the initial setup is not kept.
+    setup_interval: function() {
+        // Clear previous interval if there is any.
+        if (this.interval_id !== null) {
+            window.clearInterval(this.interval_id);
+        }
+
+        this.interval_id = window.setInterval(function() {timer.update();}, 1000);
     },
 
     get_time_text: function() {
@@ -26,10 +39,9 @@ var timer = {
     // This gets called every second to update the clock.
     update: function() {
         if (this.time > 0) {
-            this.set(this.time - 1);
+            this.time = this.time - 1;
+            this.update_display();
         }
-
-        console.log(this.time);
     }
 };
 
@@ -38,5 +50,3 @@ $(document).ready(function() {
     $('.pomodoro').click(function() {timer.set(pomodoro_time)});
     $('.break').click(function() {timer.set(break_time)});
 });
-
-window.setInterval(function() {timer.update()}, 1000);
