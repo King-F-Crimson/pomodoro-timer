@@ -1,31 +1,46 @@
-// Standard Pomodoro time in seconds.
-var pomodoro_time = 25 * 60;
-var break_time = 5 * 60;
-
 var timer = {
     element: $('.timer'),
     time: 0,
+    state: 'stop',
     interval_id: null,
 
-    set: function(time) {
+    // Standard Pomodoro time in seconds.
+    pomodoro_time: 25 * 60,
+    break_time: 5 * 60,
+
+    set_time: function(time) {
         this.time = time;
         this.update_display();
     },
 
     // Sets the time and setups the interval, only to be run when the timer is stopped initially.
     start: function(time) {
-        this.set(time)
-
         this.setup_interval();
+
+        this.set_time(time);
     },
 
     stop: function() {
         // Clear previous interval if there is any.
         if (this.interval_id !== null) {
-            window.clearInterval(this.interval_id);
+            this.clear_interval();
         }
 
-        this.set(0);
+        this.set_time(0);
+    },
+
+    set_state: function(state) {
+        this.state = state;
+
+        if (state === 'pomodoro') {
+            this.start(this.pomodoro_time);
+        }
+        if (state === 'break') {
+            this.start(this.break_time);
+        }
+        if (state === 'stop') {
+            this.stop();
+        }
     },
 
     // Interval function is setup when the timer is set so the "leftover" time
@@ -33,10 +48,16 @@ var timer = {
     setup_interval: function() {
         // Clear previous interval if there is any.
         if (this.interval_id !== null) {
-            window.clearInterval(this.interval_id);
+            this.clear_interval();
         }
 
         this.interval_id = window.setInterval(function() {timer.update();}, 1000);
+    },
+
+    clear_interval: function() {
+        window.clearInterval(this.interval_id);
+
+        this.interval_id = null;
     },
 
     get_time_text: function() {
@@ -53,14 +74,14 @@ var timer = {
     // This gets called every second to update the clock.
     update: function() {
         if (this.time > 0) {
-            this.set(this.time - 1);
+            this.set_time(this.time - 1);
         }
     }
 };
 
 $(document).ready(function() {
     // Assign button press to the functions.
-    $('.pomodoro').click(function() {timer.start(pomodoro_time)});
-    $('.break').click(function() {timer.start(break_time)});
-    $('.stop').click(function() {timer.stop()});
+    $('.pomodoro').click(function() {timer.set_state('pomodoro')});
+    $('.break').click(function() {timer.set_state('break')});
+    $('.stop').click(function() {timer.set_state('stop')});
 });
