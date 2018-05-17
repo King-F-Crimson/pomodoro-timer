@@ -1,4 +1,7 @@
 body {
+    margin: 0;
+    padding: 0;
+
     line-height: 1.4;
     font-size: 18px;
     font-family: "Helvetica Neue";
@@ -9,6 +12,7 @@ body {
 
 #main-content {
     margin: auto;
+    padding: 100px 0;
 
     max-width: 800px;
 }
