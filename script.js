@@ -6,7 +6,8 @@ var timer = {
 
     // Standard Pomodoro time in seconds.
     pomodoro_time: 25 * 60,
-    break_time: 5 * 60,
+    short_break_time: 5 * 60,
+    long_break_time: 15 * 60,
 
     set_time: function(time) {
         this.time = time;
@@ -35,8 +36,8 @@ var timer = {
         if (state === 'pomodoro') {
             this.start(this.pomodoro_time);
         }
-        else if (state === 'break') {
-            this.start(this.break_time);
+        else if (state === 'short_break') {
+            this.start(this.short_break_time);
         }
         else if (state === 'stop') {
             this.stop();
@@ -73,9 +74,9 @@ var timer = {
 
     switch_to_next_state: function() {
         if (this.state === 'pomodoro') {
-            this.set_state('break');
+            this.set_state('short_break');
         }
-        else if (this.state === 'break') {
+        else if (this.state === 'short_break') {
             this.set_state('pomodoro');
         }
     },
@@ -94,6 +95,6 @@ var timer = {
 $(document).ready(function() {
     // Assign button press to the functions.
     $('.pomodoro').click(function() {timer.set_state('pomodoro')});
-    $('.break').click(function() {timer.set_state('break')});
+    $('.short-break').click(function() {timer.set_state('short_break')});
     $('.stop').click(function() {timer.set_state('stop')});
 });
