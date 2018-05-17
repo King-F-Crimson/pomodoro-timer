@@ -25,6 +25,11 @@ body {
     text-align: center;
 }
 
+.control {
+    margin: 20px 0;
+    padding: 0;
+}
+
 .button-group {
     max-width: 400px;
     min-height: 60px;
@@ -57,4 +62,26 @@ body {
 .button:hover {
     background-color: #FFFFFF;
     color: #FF7161;
+}
+
+.pomodoro-counter {
+    max-width: 400px;
+    min-height: 60px;
+
+    margin: 0 auto 10px;
+
+    display: flex;
+    justify-content: space-around;
+}
+
+.tomato {
+    width: 60px;
+
+    margin: 0 5px;
+    padding: 0;
+
+    box-sizing: border-box;
+
+    border: 2px solid #FFFFFF;
+    border-radius: 50%;
 }
