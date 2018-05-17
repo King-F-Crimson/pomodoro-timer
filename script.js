@@ -19,6 +19,15 @@ var timer = {
         this.setup_interval();
     },
 
+    stop: function() {
+        // Clear previous interval if there is any.
+        if (this.interval_id !== null) {
+            window.clearInterval(this.interval_id);
+        }
+
+        this.set(0);
+    },
+
     // Interval function is setup when the timer is set so the "leftover" time
     // from the initial setup is not kept.
     setup_interval: function() {
@@ -53,4 +62,5 @@ $(document).ready(function() {
     // Assign button press to the functions.
     $('.pomodoro').click(function() {timer.start(pomodoro_time)});
     $('.break').click(function() {timer.start(break_time)});
+    $('.stop').click(function() {timer.stop()});
 });

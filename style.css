@@ -29,7 +29,7 @@ body {
     max-width: 400px;
     height: 60px;
 
-    margin: auto;
+    margin: 0 auto 10px;
 
     display: flex;
     justify-content: space-between;
