@@ -19,6 +19,9 @@ var timer = {
     short_break_time: 5 * 60,
     long_break_time: 15 * 60,
 
+    single_ding: new Audio('single_ding.mp3'),
+    double_ding: new Audio('double_ding.mp3'),
+
     set_time: function(time) {
         this.time = time;
         this.update_display();
@@ -88,6 +91,8 @@ var timer = {
 
     switch_to_next_state: function() {
         if (this.state === 'pomodoro') {
+            this.single_ding.play();
+
             this.set_pomodoro_count(this.pomodoro_count + 1);
 
             if (this.pomodoro_count < this.max_pomodoro_count) {
@@ -98,9 +103,13 @@ var timer = {
             }
         }
         else if (this.state === 'short_break') {
+            this.double_ding.play();
+
             this.set_state('pomodoro');
         }
         else if (this.state === 'long_break') {
+            this.double_ding.play();
+
             this.set_pomodoro_count(0);
 
             this.set_state('pomodoro');
