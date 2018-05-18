@@ -1,11 +1,18 @@
 var timer = {
     timer_element: $('.timer'),
+    title_element: $('title'),
 
     time: 0,
     state: 'stop',
     pomodoro_count: 0,
     max_pomodoro_count: 4,
     interval_id: null,
+
+    state_name: {
+        pomodoro: "Pomodoro",
+        short_break: "Short break",
+        long_break: "Long break"
+    },
 
     // Standard Pomodoro time in seconds.
     pomodoro_time: 25 * 60,
@@ -76,6 +83,7 @@ var timer = {
 
     update_display: function() {
         this.timer_element.text(this.get_time_text());
+        this.title_element.text(this.get_time_text() + " - " + this.state_name[this.state]);
     },
 
     switch_to_next_state: function() {
