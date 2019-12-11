@@ -11,7 +11,8 @@ var timer = {
     state_name: {
         pomodoro: "Pomodoro",
         short_break: "Short break",
-        long_break: "Long break"
+        long_break: "Long break",
+        stop: "Stopped"
     },
 
     // Standard Pomodoro time in seconds.
