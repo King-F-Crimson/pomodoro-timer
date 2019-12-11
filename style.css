@@ -57,6 +57,8 @@ body {
     text-align: center;
 
     transition: all 0.1s ease-out;
+
+    cursor: pointer;
 }
 
 .button:hover {
